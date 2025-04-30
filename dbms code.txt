@@ -1,0 +1,103 @@
+import java.time.LocalDate;
+import java.util.*;
+
+class Customer {
+    String name, phoneNo, email, address;
+
+    public Customer(String name, String phoneNo, String email, String address) {
+        this.name = name;
+        this.phoneNo = phoneNo;
+        this.email = email;
+        this.address = address;
+    }
+}
+
+class Author {
+    int id;
+    String name, address;
+
+    public Author(int id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+}
+
+class Publisher {
+    int id;
+    String name, address, phoneNo;
+
+    public Publisher(int id, String name, String address, String phoneNo) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.phoneNo = phoneNo;
+    }
+}
+
+class Book {
+    String isbn, title, language;
+    double price;
+    int year;
+    Author author;
+    Publisher publisher;
+
+    public Book(String isbn, String title, String language, double price, int year, Author author, Publisher publisher) {
+        this.isbn = isbn;
+        this.title = title;
+        this.language = language;
+        this.price = price;
+        this.year = year;
+        this.author = author;
+        this.publisher = publisher;
+    }
+}
+
+class Purchase {
+    Customer customer;
+    Book book;
+    String store;
+    LocalDate date;
+
+    public Purchase(Customer customer, Book book, String store, LocalDate date) {
+        this.customer = customer;
+        this.book = book;
+        this.store = store;
+        this.date = date;
+    }
+}
+
+public class BookStoreSystem {
+    public static void main(String[] args) {
+        Author author1 = new Author(1, "George Orwell", "London, UK");
+        Publisher publisher1 = new Publisher(1, "Penguin Books", "New York, USA", "1234567890");
+
+        Book book1 = new Book("978-0451524935", "1984", "English", 9.99, 1949, author1, publisher1);
+        Book book2 = new Book("978-0451526342", "Animal Farm", "English", 7.99, 1945, author1, publisher1);
+
+        Customer customer1 = new Customer("Alice Smith", "9876543210", "alice@example.com", "221B Baker Street, London");
+        Customer customer2 = new Customer("Bob Johnson", "9123456789", "bob@example.com", "742 Evergreen Terrace, Springfield");
+
+        Purchase purchase1 = new Purchase(customer1, book1, "Central Bookstore", LocalDate.now());
+        Purchase purchase2 = new Purchase(customer2, book2, "Downtown Books", LocalDate.now());
+
+        List<Purchase> purchases = Arrays.asList(purchase1, purchase2);
+
+        for (Purchase p : purchases) {
+            System.out.println("Customer Name: " + p.customer.name);
+            System.out.println("Phone No: " + p.customer.phoneNo);
+            System.out.println("Email: " + p.customer.email);
+            System.out.println("Address: " + p.customer.address);
+            System.out.println("Book Purchased: " + p.book.title);
+            System.out.println("ISBN: " + p.book.isbn);
+            System.out.println("Language: " + p.book.language);
+            System.out.println("Price: $" + p.book.price);
+            System.out.println("Published Year: " + p.book.year);
+            System.out.println("Author: " + p.book.author.name + " (" + p.book.author.address + ")");
+            System.out.println("Publisher: " + p.book.publisher.name + " (" + p.book.publisher.address + ")");
+            System.out.println("Store: " + p.store);
+            System.out.println("Purchase Date: " + p.date);
+            System.out.println("----------------------------------------");
+        }
+    }
+}
